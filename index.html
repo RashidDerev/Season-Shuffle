@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#30170c">
+<meta name="description" content="Season Shuffle — волшебная деревянная головоломка. Вращайте барабан, собирайте сезоны и откройте секрет четырёх дверец.">
+<title>Season Shuffle · Мастерская четырёх сезонов</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236f390f'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='48'%3E🌼%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/workshop-cabinet.png" as="image">
+<link rel="preload" href="assets/tile-bodies-v3.png" as="image">
+<link rel="preload" href="assets/carved-door-v4.png" as="image">
+<link rel="stylesheet" href="styles.css">
+<script src="engine.js" defer></script>
+<script src="game.js" defer></script>
+</head>
+<body>
+<svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<radialGradient id="petal"><stop stop-color="#fffbe3"/><stop offset=".7" stop-color="#fff4c8"/><stop offset="1" stop-color="#e7c383"/></radialGradient>
+<radialGradient id="pollen" cx="35%" cy="25%"><stop stop-color="#fff59a"/><stop offset=".6" stop-color="#ffcb27"/><stop offset="1" stop-color="#dd8508"/></radialGradient>
+<linearGradient id="leaf-gold" x2=".5" y2="1"><stop stop-color="#fff1af"/><stop offset="1" stop-color="#ffd064"/></linearGradient>
+<symbol id="icon-sun" viewBox="0 0 64 64"><g fill="currentColor"><path d="m32 1 4 11h-8zm0 62-4-11h8zM1 32l11-4v8zm62 0-11 4v-8zM10 10l11 5-6 6zm44 44-11-5 6-6zM54 10l-5 11-6-6zM10 54l5-11 6 6z"/><circle cx="32" cy="32" r="15" fill="url(#pollen)" stroke="#ffe88d" stroke-width="1.2"/></g></symbol>
+<symbol id="icon-snow" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 3v58M7 17l50 30M7 47l50-30M24 9l8 8 8-8M24 55l8-8 8 8M8 26l11-3-3-11M48 52l-3-11 11-3M8 38l11 3-3 11M48 12l-3 11 11 3"/></g></symbol>
+<symbol id="icon-leaf" viewBox="0 0 64 64"><path d="m32 2 7 15 9-7-1 14 13-4-6 13 7 3-19 13-8-1-2 14-2-14-8 1L3 36l7-3-6-13 13 4-1-14 9 7z" fill="url(#leaf-gold)" stroke="#ffe3a0" stroke-width="1"/><path d="M32 12v40M32 31l-10-9m10 19L15 31m17 0 10-9M32 41l17-10" fill="none" stroke="#d59430" stroke-width="1.2" opacity=".6"/></symbol>
+<symbol id="icon-flower" viewBox="0 0 64 64"><g fill="url(#petal)" stroke="#ffe9b1" stroke-width=".6"><ellipse cx="32" cy="16" rx="9" ry="14"/><ellipse cx="32" cy="16" rx="9" ry="14" transform="rotate(60 32 32)"/><ellipse cx="32" cy="16" rx="9" ry="14" transform="rotate(120 32 32)"/><ellipse cx="32" cy="16" rx="9" ry="14" transform="rotate(180 32 32)"/><ellipse cx="32" cy="16" rx="9" ry="14" transform="rotate(240 32 32)"/><ellipse cx="32" cy="16" rx="9" ry="14" transform="rotate(300 32 32)"/></g><circle cx="32" cy="32" r="10" fill="url(#pollen)" stroke="#e6a325"/></symbol>
+<symbol id="icon-star" viewBox="0 0 24 24"><path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="currentColor"/></symbol>
+<symbol id="icon-reset" viewBox="0 0 24 24"><path d="M4 11a8 8 0 1 1 2 6M4 5v6h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="icon-gear" viewBox="0 0 24 24"><path d="m9.5 3-.6 2.3-1.6.9-2.3-.6L2.5 10l1.7 1.7v1.8l-1.7 1.7 2.5 4.3 2.3-.6 1.6.9.6 2.2h5l.6-2.2 1.6-.9 2.3.6 2.5-4.3-1.7-1.7v-1.8l1.7-1.7L19 5.6l-2.3.6-1.6-.9L14.5 3z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12.5" r="3" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+<symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 3v17m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<header class="topbar"><div class="brand"><svg aria-hidden="true"><use href="#icon-flower"/></svg><span>SEASON SHUFFLE</span></div><div class="header-actions"><span class="mobile-progress" aria-label="Закрыто колонок"><svg aria-hidden="true"><use href="#icon-check"/></svg><span id="mobile-closed">0 / 4</span></span><button class="icon-button rules-trigger" title="Как играть" aria-label="Как играть">?</button><button class="icon-button" id="new-game" title="Новая партия" aria-label="Новая партия"><svg><use href="#icon-reset"/></svg></button><button class="icon-button" id="settings" title="Настройки" aria-label="Настройки"><svg><use href="#icon-gear"/></svg></button></div></header>
+<main class="playroom">
+<aside class="intro-panel"><span class="eyebrow">МАСТЕРСКАЯ ЧЕТЫРЁХ СЕЗОНОВ</span><h1>Чуть-чуть<br>магии.<br><em>Ваш ход.</em></h1><p class="intro-copy">Вращайте барабан, собирайте<br>три одинаковых сезона<br>и закройте все четыре дверцы.</p><button class="text-button rules-trigger"><span class="round-question">?</span> Как играть</button><div class="season-palette" aria-hidden="true"><svg><use href="#icon-sun"/></svg><svg><use href="#icon-snow"/></svg><svg><use href="#icon-leaf"/></svg><svg><use href="#icon-flower"/></svg></div><span class="tiny-caption">Никакой спешки. Только немного волшебства.</span></aside>
+<section class="game-area" aria-label="Игровой автомат Season Shuffle">
+<div class="game-heading">Партия <span id="seed-label"></span></div>
+<div class="machine" id="machine">
+<div class="cabinet-art" role="img" aria-label="Прежняя резная шкатулка с золотыми листьями, цветами и фигурным основанием; увеличены барабан и игровое поле"><span class="cabinet-band band-sign" style="top:0.000000%;height:14.615000%"><img src="assets/workshop-cabinet.png" alt="" aria-hidden="true" draggable="false" style="top:0.000000%;height:526.027397%"></span><span class="cabinet-band band-drum" style="top:14.600000%;height:17.515000%"><img src="assets/workshop-cabinet.png" alt="" aria-hidden="true" draggable="false" style="top:-140.384615%;height:738.461538%"></span><span class="cabinet-band band-bridge" style="top:32.100000%;height:5.015000%"><img src="assets/workshop-cabinet.png" alt="" aria-hidden="true" draggable="false" style="top:-500.000000%;height:1536.000000%"></span><span class="cabinet-band band-field" style="top:37.100000%;height:48.015000%"><img src="assets/workshop-cabinet.png" alt="" aria-hidden="true" draggable="false" style="top:-97.402597%;height:249.350649%"></span><span class="cabinet-band band-base" style="top:85.100000%;height:10.315000%"><img src="assets/workshop-cabinet.png" alt="" aria-hidden="true" draggable="false" style="top:-533.333333%;height:673.684211%"></span><span class="cabinet-band band-feet" style="top:95.400000%;height:4.615000%"><img src="assets/workshop-cabinet.png" alt="" aria-hidden="true" draggable="false" style="top:-1569.565217%;height:1669.565217%"></span></div>
+<div class="drum-window"><div class="preview-tray" id="tray" role="group" aria-label="Барабан с тремя рядами фишек"></div><div class="drum-glass"></div></div><div class="active-frame" aria-hidden="true"><img src="assets/active-row-frame.svg" alt="" draggable="false"></div>
+<div class="drum-axle left"></div><div class="drum-axle right"></div>
+<div class="drop-guide" aria-hidden="true"><span>⌄</span><span>⌄</span><span>⌄</span><span>⌄</span></div>
+<div class="channels" id="channels"></div>
+<div class="control-panel" role="group" aria-label="Управление игрой">
+<button class="game-button drop-button" id="drop" title="Сбросить активный ряд — Пробел" aria-label="DROP — сбросить фишки, клавиша Пробел"><span class="button-main">DROP <svg aria-hidden="true"><use href="#icon-arrow"/></svg></span><span class="button-sub">ПРОБЕЛ</span></button>
+<div class="direction-pad"><button class="game-button arrow-button rotate-button" id="rotate" title="Вращать барабан — ↑" aria-label="Вращать барабан вверх, стрелка вверх">↑</button><button class="game-button arrow-button shift-left" id="shift-left" title="Сдвинуть активный ряд влево — ←" aria-label="Сдвинуть активный ряд влево">←</button><button class="game-button arrow-button rotate-down" id="rotate-down" title="Вращать барабан обратно — ↓" aria-label="Вращать барабан вниз, стрелка вниз">↓</button><button class="game-button arrow-button shift-right" id="shift-right" title="Сдвинуть активный ряд вправо — →" aria-label="Сдвинуть активный ряд вправо">→</button></div>
+</div>
+</div>
+<div class="status-line" id="status" role="status" aria-live="polite">Пробел — DROP · ↑ ↓ барабан · ← → сдвиг</div>
+<div class="under-controls"><button class="small-button" id="undo" disabled title="Отменить ход — Z"><span aria-hidden="true">↶</span> Отменить</button><button class="small-button" id="hint"><svg aria-hidden="true"><use href="#icon-star"/></svg> Подсказка</button><button class="small-button mobile-rules rules-trigger">Правила</button></div>
+</section>
+<aside class="notes-panel"><div class="closed-progress" id="progress" aria-label="Закрыто колонок: 0 из 4"><div class="progress-heading"><span>ДВЕРЦЫ ЗАКРЫТЫ</span><b><span id="closed-count">0</span> / 4</b></div><div class="progress-dots" id="progress-dots"></div></div><div class="match-demo" aria-hidden="true"><i class="mini-chip"><svg><use href="#icon-flower"/></svg></i><i class="mini-chip"><svg><use href="#icon-flower"/></svg></i><i class="mini-chip"><svg><use href="#icon-flower"/></svg></i></div><h2>Три сезона —<br>одно совпадение</h2><p>Одинаковые фишки исчезают.<br>Пустая колонка закрывается.</p><div class="turn-counter"><span>ХОДОВ СДЕЛАНО</span><strong id="move-count">00</strong></div><span class="tiny-caption">Партия сохраняется сама.</span></aside>
+</main>
+  <dialog id="rules-dialog" class="paper-dialog"><button class="dialog-close" aria-label="Закрыть">×</button><span class="eyebrow">ДОБРО ПОЖАЛОВАТЬ В МАСТЕРСКУЮ</span><h2>Четыре сезона.<br>Четыре маленьких секрета.</h2>
+    <ol class="rules-list">
+      <li><b>Две разные фишки в каждой колбе.</b> В начале партии в каждой колонке лежат две фишки разных цветов. Три ряда барабана заполняются случайными фишками.</li>
+      <li><b>↑ и ↓ вращают барабан.</b> Верхний ряд становится средним, средний уходит вниз, нижний появляется сверху. Стрелка ↓ вращает в обратную сторону. Активен крупный ряд в центре.</li>
+      <li><b>Стрелки сдвигают активный ряд по кругу.</b> Крайняя фишка появляется с другого края.</li>
+      <li><b>DROP / Пробел сбрасывает активный ряд.</b> Фишки падают только в открытые колонки. Затем все четыре фишки среднего ряда заменяются случайными.</li>
+      <li><b>Соберите три по вертикали.</b> Три соседние фишки одного сезона исчезают, остальные опускаются. Если образуется новая тройка, она тоже исчезает. Пустая колонка закрывается.</li>
+      <li><b>Полная колба даёт последний шанс.</b> Если все 12 ячеек заняты, следующая фишка должна совпасть с двумя верхними. При совпадении тройка исчезнет. Если хотя бы в одной полной колонке совпадения нет, партия заканчивается. Можно отменить ход и попробовать иначе.</li>
+    </ol>
+    <p class="dialog-note">Отмена падения возвращает все три ряда к состоянию перед сбросом.</p><p class="keyboard-help">Компьютер: <kbd>↑</kbd> / <kbd>↓</kbd> барабан · <kbd>Пробел</kbd> DROP · <kbd>←</kbd> / <kbd>→</kbd> сдвиг · <kbd>Z</kbd> отмена</p><button class="solid-button" id="start-playing">Понятно, играем</button>
+  </dialog>
+  <dialog id="settings-dialog" class="paper-dialog compact-dialog"><button class="dialog-close" aria-label="Закрыть">×</button><span class="eyebrow">МАСТЕРСКАЯ</span><h2>Как вам удобно</h2><label class="setting-row"><span>Звук фишек<small>Тихие деревянные щелчки</small></span><input id="sound-setting" type="checkbox" role="switch"></label><label class="setting-row"><span>Меньше анимации<small>Быстрые и мягкие переходы</small></span><input id="motion-setting" type="checkbox" role="switch"></label><p class="dialog-note">Партия сохраняется на этом устройстве автоматически.</p></dialog>
+  <dialog id="new-dialog" class="paper-dialog compact-dialog"><button class="dialog-close" aria-label="Закрыть">×</button><span class="eyebrow">НОВОЕ НАЧАЛО</span><h2>Ещё одну партию?</h2><p>Текущая партия будет заменена новой.</p><div class="dialog-actions"><button class="soft-button dialog-cancel">Продолжить игру</button><button class="solid-button" id="confirm-new">Начать новую</button></div></dialog>
+  <dialog id="result-dialog" class="paper-dialog result-dialog"><span class="result-emblem" id="result-emblem">★</span><span class="eyebrow" id="result-kicker">ВСЕ СЕКРЕТЫ РАСКРЫТЫ</span><h2 id="result-title">Мастерская закрыта.<br>Чудеса продолжаются.</h2><p id="result-text"></p><button class="solid-button" id="play-again">Ещё одна партия</button><button class="text-button" id="result-back">Посмотреть поле</button></dialog>
+<noscript>Для игры нужно включить JavaScript в браузере.</noscript>
+</body>
+</html>

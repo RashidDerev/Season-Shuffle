@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f1e8d7">
+  <meta name="description" content="Четыре деревянные колонки и четыре цвета. Тёплая браузерная головоломка для телефона и компьютера.">
+  <title>Четыре секрета · деревянная головоломка</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='16' fill='%23997148'/%3E%3Cpath d='m32 13 6 12 14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2z' fill='%23f8d67d'/%3E%3C/svg%3E">
+  <style>:root{--ink:#4e4132;--muted:#94836c;--paper:#f4ecde;--green:#657756;--cell:clamp(23px,3.5svh,31px);--chip-w:calc(var(--cell)*1.3);--chip-h:calc(var(--cell)*.86);--c0:#c36c53;--c1:#63929d;--c2:#d5ad52;--c3:#7e9b65;--grain:repeating-linear-gradient(3deg,transparent 0 7px,#55301109 8px,transparent 10px,transparent 20px,#fff1cb16 22px,transparent 23px);font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:#f2e9d9;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;min-width:300px;min-height:100svh;background:radial-gradient(ellipse at 46% 38%,#fffcf4 0,#f4ecde 47%,#e8dcc7 100%);-webkit-tap-highlight-color:transparent}body::before{content:'';position:fixed;inset:0;opacity:.065;pointer-events:none;z-index:10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.7' filter='url(%23n)'/%3E%3C/svg%3E")}button,a,input{touch-action:manipulation}button{font-family:inherit;cursor:pointer;color:inherit}button:disabled{cursor:default}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #578c9a;outline-offset:5px}svg{width:24px;height:24px}.svg-defs{position:absolute;width:0;height:0;overflow:hidden}.room-light{position:fixed;width:40vw;height:80vh;left:-18vw;top:-20vh;transform:rotate(27deg);background:#ffffff20;box-shadow:12vw 0 0 #ffffff0e;pointer-events:none}
+.topbar{max-width:1352px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:30px 52px 22px;border-bottom:1px solid #99836424;position:relative}.brand{color:var(--ink);display:flex;gap:13px;align-items:center;text-decoration:none;font-size:23px;letter-spacing:-.6px;font-weight:600}.brand small{display:block;font-family:Arial,sans-serif;font-size:8px;font-weight:400;letter-spacing:2.1px;margin-top:6px;color:var(--muted)}.brand-mark{width:41px;height:45px;background:linear-gradient(130deg,#b99160,#926c46);border:1px solid #957047;border-radius:12px 12px 16px 16px;display:grid;place-items:center;box-shadow:inset 1px 1px 1px #f4d8a7,0 3px 5px #6f4b2520;transform:rotate(-6deg)}.brand-mark svg{width:22px;fill:#f4dcab;filter:drop-shadow(0 1px #725435)}.header-actions{display:flex;align-items:center;gap:17px}.prototype-label{font:10px Arial,sans-serif;color:#9a8a73;margin-right:10px;border:1px solid #a28e702b;padding:7px 11px;border-radius:20px}.icon-button{border:0;background:transparent;opacity:.6;padding:8px;display:grid;place-items:center}.icon-button:hover{opacity:1}.icon-button svg{width:23px;height:23px}
+.playroom{max-width:1270px;margin:34px auto 0;padding:0 44px;display:grid;grid-template-columns:minmax(210px,1fr) minmax(325px,430px) minmax(190px,1fr);gap:48px;align-items:start}.intro-panel{padding-top:58px;position:relative}.eyebrow{font:9px/1.6 Arial,sans-serif;letter-spacing:1.9px;font-weight:600;color:#95816a;display:block}.eyebrow>span{display:inline-block;width:5px;height:5px;border-radius:50%;background:#839268;vertical-align:middle;margin-right:7px}h1{font-size:42px;line-height:1.14;font-weight:400;letter-spacing:-1.5px;margin:21px 0 21px}h1 em{font-weight:400;color:#8c9a75}.intro-copy{font-size:14px;line-height:1.85;color:#8a7963;margin:0 0 24px}.text-button{background:transparent;border:0;padding:0;font-size:12px;display:inline-flex;gap:11px;align-items:center}.text-button:hover{color:#7f934f}.round-question{width:21px;height:21px;border:1px solid #ac9b816b;border-radius:50%;display:grid;place-items:center;font-size:12px}.color-sample{display:flex;align-items:center;gap:5px;margin-top:42px;flex-wrap:wrap}.color-sample i{display:block;height:11px;width:11px;background:var(--chip-color);border-radius:50%;box-shadow:inset 0 1px 1px #fff7,0 1px 1px #0002}.color-sample>span{flex-basis:100%;font-size:10px;color:#9d8b71;margin-top:5px}.soldier-scene{width:210px;margin-top:10px;margin-left:-11px;opacity:.91}.soldier-scene svg{width:100%;height:auto}.soldier-scene>span{display:block;font-size:9px;font-style:italic;color:#a49072;text-align:center;margin-top:-6px}
+.game-area{min-width:0;position:relative;width:100%;max-width:350px;justify-self:center;margin-inline:auto}.game-heading{display:flex;align-items:center;justify-content:space-between;padding:0 10px 14px;font:10px Arial,sans-serif;color:#9a8468}.level-label{font-size:9px;letter-spacing:1.7px}.level-label b{font-weight:400}.closed-progress{display:flex;gap:12px;align-items:center;font-size:11px}.closed-progress b{font-weight:400;color:#657553}.progress-dots{display:flex;gap:5px}.progress-dots i{width:7px;height:7px;background:#c9baa1;border-radius:50%;transition:background .4s}.progress-dots i.done{background:#849465;box-shadow:0 0 0 2px #83926818}
+.machine{position:relative;padding:0 20px 0;border-radius:37px 37px 21px 21px;background:var(--grain),linear-gradient(90deg,#a77646 0,#d0a46b 3%,#e2ba80 8%,#c69a60 48%,#d9b27a 94%,#956438 100%);border:1px solid #ae804d;box-shadow:inset 0 2px 1px #fff1c7,inset 0 -7px 0 #8e613b,0 6px 0 #865b37,0 9px 0 #765335,0 15px 17px #744d3125,0 37px 37px -16px #77563132;isolation:isolate}.machine::before{content:'';position:absolute;inset:7px 7px 9px;border:1px solid #ffdfa64a;border-radius:29px 29px 13px 13px;pointer-events:none}.wood-crown{height:39px;display:flex;gap:10px;align-items:center;justify-content:center;color:#966d43}.wood-crown svg{width:15px;height:15px;fill:#996d3e;filter:drop-shadow(0 1px #f6d7a477)}.crown-line{width:45px;height:1px;background:#9c754344;box-shadow:0 1px #f9dca844}.preview-tray{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;background:linear-gradient(#8c633c,#a27746);border-radius:13px;padding:6px;box-shadow:inset 0 2px 5px #5f3e2980,0 1px #ffe5af;position:relative;margin:0 -2px}.slot{height:calc(var(--cell)*1.58);padding:0;position:relative;border-radius:9px;border:1px solid #7c582e;background:linear-gradient(135deg,#755335,#b68b54);box-shadow:inset 1px 2px 5px #4e301e9c,0 1px #f3d59b55;display:grid;place-items:center;transition:box-shadow .2s;min-width:0}.slot .token{position:relative;left:auto;bottom:auto;transform:none;pointer-events:none}.slot-number{position:absolute;top:1px;left:3px;font:7px Arial,sans-serif;color:#e8cda070}.drop-guide{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:2px 4px;height:23px;text-align:center;font:14px Arial,sans-serif;color:#92673b78}.drop-guide span.muted{opacity:0}.channels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding:0 4px}.channel{position:relative;height:calc(var(--cell)*12 + 10px);border-radius:8px 8px 11px 11px;border:1px solid #845a32;background:linear-gradient(90deg,#86613d 0%,#ba915c 8%,#c9a16b 22%,#d9b580 55%,#c69f69 91%,#80572f 100%);box-shadow:inset 0 3px 8px #613f2a70,0 1px 0 #ffdfac,1px 0 0 #ffe2a766;overflow:hidden}.cell-grid{position:absolute;inset:3px 2px 6px;display:flex;flex-direction:column;justify-content:space-around}.cell-grid i{height:var(--cell);flex:none;border-bottom:1px solid #7c53291b;position:relative}.cell-grid i::before{content:'';position:absolute;left:50%;top:45%;width:2px;height:2px;border-radius:50%;background:#7b552b35}.channel-number{position:absolute;bottom:3px;left:0;right:0;text-align:center;font:8px Arial,sans-serif;color:#76552e8f;z-index:0}.token{--chip-color:var(--c0);position:absolute;bottom:calc(var(--row)*var(--cell) + 6px);left:50%;transform:translateX(-50%);width:var(--chip-w);height:var(--chip-h);background:var(--grain),radial-gradient(ellipse at 30% 20%,#fff5 0,transparent 65%),linear-gradient(180deg,#ffffff18,transparent 60%,#00000013),var(--chip-color);border:1px solid color-mix(in srgb,var(--chip-color),#3e2c21 30%);border-radius:44% / 34%;box-shadow:inset 0 2px 1px #ffffff70,inset 1px 0 1px #fff2,inset 0 -4px 0 #0002,0 3px 2px #68412259,0 4px 0 #56391b22;z-index:2;display:grid;place-items:center;will-change:transform;transition:bottom .28s ease-in}.token::after{content:'';position:absolute;inset:4px 5px 7px;border-radius:50%;border-top:1px solid #fff3;border-bottom:1px solid #382f1712;pointer-events:none}.c0{--chip-color:var(--c0)}.c1{--chip-color:var(--c1)}.c2{--chip-color:var(--c2)}.c3{--chip-color:var(--c3)}.token.merging{animation:merge-away .32s both;z-index:5}.token.landing{animation:land .28s}.channel.danger{box-shadow:inset 0 3px 8px #613f2a70,0 0 0 2px #b8664b}.channel.hinted::after{content:'';position:absolute;inset:2px;border:2px solid #f9e3a3;border-radius:6px;pointer-events:none;z-index:6;animation:hint-pulse 1s 3}.hint-color{position:absolute;top:7px;right:4px;border:1px solid #fff9;z-index:7;border-radius:50%;background:var(--chip-color);width:12px;height:12px;box-shadow:0 1px 3px #0005}.door{position:absolute;inset:0;z-index:4;border-radius:6px 6px 9px 9px;background:var(--grain),linear-gradient(90deg,#b78b55,#e2bd85 14%,#d4ac73 50%,#dab780 85%,#ad804c);box-shadow:inset 2px 0 1px #f4d59e,inset -2px 0 1px #90663b,inset 0 -3px 2px #94683e;border:1px solid #a77947;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}.door::before,.door::after{content:'';position:absolute;left:5px;right:5px;height:3px;border-top:1px solid #92683c6b;border-bottom:1px solid #ffe4b56b}.door::before{top:13%}.door::after{bottom:13%}.door svg{width:28px;height:28px;fill:#a37b45;filter:drop-shadow(0 1px #f2d6a3);opacity:.8}.door .door-flourish{font-size:29px;line-height:1;color:#ad834e;text-shadow:0 1px #f1d5a5;writing-mode:vertical-rl}.door.closing{animation:door-close .75s cubic-bezier(.24,.7,.35,1) both}.wood-base{height:33px;display:flex;justify-content:space-between;align-items:center;gap:5px;font:6px Arial,sans-serif;letter-spacing:1.6px;color:#8b643b;text-shadow:0 1px #f1d3a266}.screw{width:5px;height:5px;background:#9c7447;border-radius:50%;box-shadow:inset 0 1px 1px #765334,0 1px #f2d29c;position:relative}.screw::after{content:'';position:absolute;width:3px;height:1px;background:#5e492e;top:2px;left:1px;transform:rotate(-25deg)}
+.control-panel{display:grid;grid-template-columns:1fr 1.18fr;gap:14px;margin:27px 5px 0}.game-button{border-radius:12px;min-height:67px;border:1px solid #b79260;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;position:relative;transition:transform .12s,filter .15s;padding:10px 6px}.game-button:hover:enabled{filter:brightness(1.04)}.game-button:active:enabled{transform:translateY(3px)}.game-button:disabled{opacity:.5}.rotate-button{background:var(--grain),linear-gradient(#f2d9ac,#dfbc86);box-shadow:inset 0 1px #fff3d3,0 4px 0 #b68e59,0 5px 2px #8d684226;color:#6f5437}.button-main{display:flex;align-items:center;gap:11px;font:600 16px Arial,sans-serif;letter-spacing:1.7px}.rotate-icon{font-size:24px;line-height:17px;font-weight:400}.button-sub{font:9px Arial,sans-serif;letter-spacing:.1px;opacity:.75;display:flex;gap:9px;align-items:center}.drop-button{background:var(--grain),linear-gradient(#89966e,#6d7e58);color:#fcf2d9;box-shadow:inset 0 1px #b2bd92,0 4px 0 #4e6043,0 5px 2px #3e542d26;border-color:#687853}.drop-button svg{width:18px;height:18px}.status-line{text-align:center;font:10px/1.5 Arial,sans-serif;color:#9c876b;min-height:33px;margin-top:16px;padding:0 5px}.status-line.warning{color:#ad5d45}.under-controls{display:flex;justify-content:center;gap:26px}.small-button{background:none;border:0;padding:3px 0;display:flex;align-items:center;gap:6px;font:10px Arial,sans-serif;color:#99846a}.small-button:hover:enabled{color:#617650}.small-button:disabled{opacity:.35}.small-button span{font-size:17px;line-height:10px}.small-button svg{width:13px;height:13px;fill:currentColor}.mobile-rules{display:none}
+.notes-panel{padding-top:64px}.note-card{border:1px solid #bca78744;background:#fff9ec38;box-shadow:0 4px 20px #ae93720b;padding:25px 22px 20px;border-radius:2px;transform:rotate(2deg);position:relative}.note-card::before{content:'';height:16px;width:54px;background:#d5c29845;position:absolute;left:50%;top:-8px;transform:translateX(-50%) rotate(-6deg);backdrop-filter:blur(2px)}.note-kicker{font:8px Arial,sans-serif;letter-spacing:1.65px;color:#aa9374}.match-demo{display:flex;gap:3px;align-items:center;margin:25px 0 21px}.mini-chip{width:22px;height:18px;background:var(--grain),linear-gradient(#fff2,#0001),var(--chip-color);border-radius:42% / 32%;box-shadow:inset 0 1px #fff8,0 2px 0 #6745254d;display:grid;place-items:center}.mini-chip svg{height:14px!important;width:14px!important}.note-card h2{font-size:22px;font-weight:400;line-height:1.2;letter-spacing:-.5px;margin:0 0 14px}.note-card p{font-size:12px;line-height:1.7;color:#a18b70;margin:0}.note-divider{height:1px;background:#b7a17f3b;margin:20px 0 14px}.note-bottom{font:9px Arial,sans-serif;display:flex;gap:7px;align-items:center;color:#8e826a}.note-bottom svg{height:12px;width:12px;color:#84916b}.turn-counter{text-align:center;margin-top:37px;display:flex;flex-direction:column;gap:9px}.turn-counter>span{font:8px Arial,sans-serif;letter-spacing:1.6px;color:#ab9678}.turn-counter strong{font-size:34px;font-weight:400;color:#9c8768}.turn-counter small{font-size:9px;font-style:italic;color:#af9d83}.horse-scene{width:210px;margin:21px 0 0 -8px}.horse-scene svg{width:100%;height:auto}.page-footer{max-width:1246px;margin:35px auto 0;border-top:1px solid #b9a58824;padding:18px 26px 22px;display:flex;align-items:center;justify-content:space-between;font-size:9px;color:#b09c7e}.page-footer>span:first-child{font-size:12px;color:#a38c6b}.page-footer .text-button{font-size:9px;color:#a18a6b}
+dialog{padding:0;color:var(--ink)}dialog::backdrop{background:#382d2290;backdrop-filter:blur(5px)}.paper-dialog{position:fixed;border:1px solid #d3bd98;border-radius:16px;background:var(--paper);box-shadow:0 25px 80px #30261e66;width:min(92vw,520px);max-height:90svh;overflow:auto;padding:34px 34px 30px}.paper-dialog h2{font-size:33px;font-weight:400;line-height:1.15;letter-spacing:-.8px;margin:17px 0 22px}.dialog-close{position:absolute;right:12px;top:9px;border:0;background:none;font:26px Arial,sans-serif;color:#9a856b;padding:8px}.rules-list{padding-left:20px;font-size:12px;line-height:1.65;color:#8b785f}.rules-list li{padding-left:5px;margin-bottom:12px}.rules-list b{font-weight:600;color:#594935}.dialog-note,.keyboard-help{font:10px/1.7 Arial,sans-serif;color:#a18b6b}.keyboard-help{border-top:1px solid #c8b48f66;padding-top:14px}kbd{font:9px Arial,sans-serif;border:1px solid #c7b390;border-radius:3px;padding:2px 4px}.solid-button{border:1px solid #65764f;border-radius:8px;padding:14px 21px;font:12px Arial,sans-serif;background:linear-gradient(#8a9970,#71835b);box-shadow:inset 0 1px #b8c595;color:#fff6de}.solid-button:hover{filter:brightness(1.06)}.soft-button{background:#e4d5bb;border:1px solid #cdb691;border-radius:8px;font:12px Arial,sans-serif;padding:14px 14px}.compact-dialog{width:min(92vw,430px)}.compact-dialog p{font-size:13px;line-height:1.6;color:#967e61}.dialog-actions{display:flex;gap:10px;margin-top:25px}.setting-row{padding:20px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d1bfa03b;font-size:15px;gap:20px}.setting-row small{display:block;font:10px Arial,sans-serif;color:#9d876a;margin-top:7px}.setting-row input{accent-color:#7e9063;width:22px;height:22px;cursor:pointer}.result-dialog{text-align:center;width:min(92vw,440px);padding:34px 30px}.result-emblem{width:72px;height:72px;display:grid;place-items:center;font-size:38px;margin:0 auto 23px;background:var(--grain),linear-gradient(140deg,#dfbd7f,#b99761);color:#fff0b9;border:1px solid #bc985d;border-radius:24px;box-shadow:inset 0 2px #f5dba4,0 4px 0 #9b7b4c;text-shadow:0 1px 2px #7f633d}.result-dialog .eyebrow{font-size:8px}.result-dialog h2{font-size:31px}.result-dialog p{color:#998063;font-size:13px;line-height:1.6;margin:0 0 24px}.result-dialog>.text-button{display:flex;margin:20px auto 0;color:#9f8968}.celebration{position:absolute;width:6px;height:10px;border-radius:2px;z-index:20;pointer-events:none;animation:confetti 1.7s ease-out forwards}
+@keyframes merge-away{0%{filter:brightness(1)}30%{filter:brightness(1.5);scale:1.08}100%{scale:.1;opacity:0}}@keyframes land{0%{scale:1.05 .83}55%{scale:.96 1.08}100%{scale:1}}@keyframes door-close{0%{transform:translateY(-104%)}80%{transform:translateY(0)}90%{transform:translateY(-2%)}100%{transform:translateY(0)}}@keyframes hint-pulse{50%{opacity:.4}}@keyframes confetti{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+body.reduced-motion *,body.reduced-motion *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}button:disabled .token{opacity:.85}
+@media(min-width:1500px){.playroom{margin-top:49px;gap:66px;max-width:1330px}.intro-panel{padding-top:74px}.notes-panel{padding-top:80px}h1{font-size:46px}.soldier-scene{margin-top:33px}}
+@media(max-width:1120px){.playroom{gap:28px;padding:0 28px;grid-template-columns:minmax(170px,1fr) minmax(310px,410px) minmax(160px,.9fr)}h1{font-size:35px}.intro-copy{font-size:12px}.note-card{padding:24px 15px 18px}.note-card h2{font-size:20px}.note-card p{font-size:11px}.horse-scene,.soldier-scene{width:180px}.note-kicker{font-size:7px;letter-spacing:1.2px}.match-demo{gap:2px}.mini-chip{width:20px;height:17px}.topbar{padding:24px 30px 20px}}
+@media(max-width:950px){.playroom{grid-template-columns:minmax(170px,1fr) minmax(310px,410px);max-width:770px;gap:48px}.notes-panel{display:none}.topbar{max-width:850px}.intro-panel{padding-top:70px}h1{font-size:39px}.intro-copy{font-size:13px}.soldier-scene{margin-top:25px;width:205px}.page-footer{max-width:800px}.machine{padding-left:19px;padding-right:19px}}
+@media(max-width:650px){:root{--cell:clamp(23px,3.65svh,30px)}.topbar{padding:16px 20px 12px;border:0}.brand{font-size:19px;gap:10px;letter-spacing:-.5px}.brand small{font-size:6px;letter-spacing:1.35px;margin-top:4px}.brand-mark{height:35px;width:32px;border-radius:10px 10px 12px 12px}.brand-mark svg{width:18px}.header-actions{gap:5px}.icon-button{padding:7px}.icon-button svg{width:21px;height:21px}.prototype-label{display:none}.playroom{display:block;margin:4px auto 0;padding:0 22px;max-width:446px}.intro-panel,.notes-panel{display:none}.game-heading{padding:0 6px 11px}.machine{padding-left:17px;padding-right:17px;border-radius:30px 30px 18px 18px}.machine::before{border-radius:23px 23px 12px 12px}.wood-crown{height:30px}.wood-crown svg{width:12px;height:12px}.wood-base{height:27px;font-size:5px;letter-spacing:1.4px}.preview-tray{gap:7px;padding:5px;border-radius:11px}.channels{gap:7px;padding:0 3px}.drop-guide{height:21px;gap:7px;padding:1px 3px}.slot{border-radius:7px;height:calc(var(--cell)*1.5)}.slot-number{display:none}.control-panel{margin-top:23px;gap:12px}.game-button{min-height:62px;border-radius:10px;gap:4px}.button-main{font-size:15px}.button-sub{font-size:8px}.status-line{margin-top:14px;font-size:9px;min-height:30px}.under-controls{gap:23px}.small-button{font-size:9px}.mobile-rules{display:inline-flex}.page-footer{border:0;justify-content:center;margin:20px auto 0;padding:0 15px 20px;font-size:8px}.page-footer>span:first-child,.page-footer .text-button{display:none}.paper-dialog{padding:30px 25px 25px}.paper-dialog h2{font-size:29px}.dialog-actions{flex-direction:column}.channel{border-radius:7px 7px 9px 9px}.door svg{width:24px;height:24px}.door .door-flourish{font-size:24px}.game-area{z-index:1}}
+@media(max-height:700px) and (max-width:650px){:root{--cell:23px}.topbar{padding-top:10px;padding-bottom:10px}.wood-crown{height:23px}.wood-base{height:23px}.drop-guide{height:17px}.control-panel{margin-top:20px}.game-button{min-height:56px}.status-line{margin-top:11px;min-height:27px}.page-footer{margin-top:13px;padding-bottom:10px}.game-heading{padding-bottom:8px}.playroom{margin-top:0}.under-controls{gap:18px}}
+@media(prefers-reduced-motion:reduce){body:not(.full-motion) *,body:not(.full-motion) *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.channel.rescue-ready{box-shadow:inset 0 3px 8px #613f2a70,0 0 0 2px #7c985f}
+.control-panel{grid-template-columns:52px minmax(0,1fr) 52px;grid-template-rows:54px 54px;gap:12px;margin-top:24px}
+.control-panel .game-button{min-height:54px;height:54px}
+.control-panel .rotate-button{grid-column:2;grid-row:1}
+.control-panel .drop-button{grid-column:2;grid-row:2}
+.control-panel .shift-button{align-self:center;padding:0;background:var(--grain),linear-gradient(#f2d9ac,#dfbc86);box-shadow:inset 0 1px #fff3d3,0 4px 0 #b68e59,0 5px 2px #8d684226;color:#6f5437;border-color:#b79260}
+.shift-button span{font:28px/1 Arial,sans-serif}
+.shift-left{grid-column:1;grid-row:1 / 3}
+.shift-right{grid-column:3;grid-row:1 / 3}
+@media(max-width:650px){.control-panel{grid-template-columns:46px minmax(0,1fr) 46px;gap:10px;margin-top:20px}}
+@media(max-height:700px) and (max-width:650px){.control-panel{grid-template-rows:48px 48px;margin-top:18px;gap:9px}.control-panel .game-button{min-height:48px;height:48px;padding:6px 4px}.control-panel .shift-button{padding:0}}
+@media(max-width:360px){.topbar{padding-left:16px;padding-right:16px}.brand{font-size:17px;gap:8px}.brand>span:last-child{white-space:nowrap}.brand small{font-size:5.5px;letter-spacing:1px}.header-actions{gap:2px}.icon-button{padding:6px}}
+@media(max-height:700px) and (max-width:650px){:root{--cell:21px}}
+
+  .preview-tray { display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
+  .drum-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }
+  .drum-row.is-active { z-index: 1; }
+  .drum-row.is-active .slot { border-color: #a77840; box-shadow: inset 1px 2px 5px #4e301e9c, 0 0 0 1px #edc992a8; }
+  .drum-row:not(.is-active) .slot { height: calc(var(--cell) * 1.18); background: linear-gradient(145deg, #6d4e33, #9a744c); }
+  .drum-row:not(.is-active) .token { width: calc(var(--chip-w) * .84); height: calc(var(--chip-h) * .82); }
+  .drum-row:not(.is-active) .slot-number { visibility: hidden; }
+  .drop-flight { position: fixed; z-index: 12; transform: none; pointer-events: none; }
+  @media (max-width: 650px) { .drum-row { gap: 7px; } }
+</style>
+
+
+</head>
+<body>
+  <svg class="svg-defs" aria-hidden="true"><defs>
+    <symbol id="icon-star" viewBox="0 0 24 24"><path d="m12 2 3.05 6.18 6.82 1-4.94 4.82 1.17 6.8L12 17.6l-6.1 3.2 1.16-6.8L2.12 9.18l6.83-1z"/></symbol>
+    <symbol id="icon-reset" viewBox="0 0 24 24"><path d="M4 11a8 8 0 1 1 2 6M4 5v6h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-gear" viewBox="0 0 24 24"><path d="m9.5 3-.6 2.3-1.6.9-2.3-.6L2.5 10l1.7 1.7v1.8l-1.7 1.7 2.5 4.3 2.3-.6 1.6.9.6 2.2h5l.6-2.2 1.6-.9 2.3.6 2.5-4.3-1.7-1.7v-1.8l1.7-1.7L19 5.6l-2.3.6-1.6-.9L14.5 3z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="12.5" r="3" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 3v17m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs></svg>
+  <div class="room-light" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Четыре секрета, главная"><span class="brand-mark"><svg><use href="#icon-star"/></svg></span><span>Четыре секрета<small>МАЛЕНЬКАЯ МАСТЕРСКАЯ ИГР</small></span></a>
+    <div class="header-actions"><span class="prototype-label">Играбельный прототип</span><button class="icon-button" id="new-game" title="Новая партия" aria-label="Новая партия"><svg><use href="#icon-reset"/></svg></button><button class="icon-button" id="settings" title="Настройки" aria-label="Настройки"><svg><use href="#icon-gear"/></svg></button></div>
+  </header>
+  <main class="playroom">
+    <aside class="intro-panel">
+      <span class="eyebrow"><span></span> НЕ ТОРОПИТЕСЬ. ПОИГРАЙТЕ.</span>
+      <h1>У каждого цвета<br>свой <em>секрет.</em></h1>
+      <p class="intro-copy">Соберите три фишки одного цвета.<br>Освободите все четыре колонки.<br>Пусть каждая дверца закроется.</p>
+      <button class="text-button rules-trigger"><span class="round-question">?</span> Как играть <span aria-hidden="true">↗</span></button>
+      <div class="color-sample" aria-label="Четыре цвета: коралловый, синий, жёлтый, зелёный"><i class="c0"></i><i class="c1"></i><i class="c2"></i><i class="c3"></i><span>Четыре цвета. Одна цель.</span></div>
+      <div class="soldier-scene" aria-hidden="true">
+        <svg viewBox="0 0 240 250"><defs><linearGradient id="toyWood" x2="1" y2=".3"><stop stop-color="#bd8650"/><stop offset=".45" stop-color="#f0c68c"/><stop offset="1" stop-color="#ac7140"/></linearGradient><linearGradient id="toyRed"><stop stop-color="#c87653"/><stop offset="1" stop-color="#8f473b"/></linearGradient></defs><ellipse cx="116" cy="230" rx="80" ry="10" fill="#795f40" opacity=".13"/><path d="M29 230h163" stroke="#a99171" opacity=".3"/><g transform="rotate(-5 110 150)"><path d="M95 157h18v57H93zM123 157h18l3 57h-20z" fill="url(#toyWood)" stroke="#ad7849"/><path d="M89 208h25v15H82q-5-8 7-15M123 208h21q15 7 10 15h-31z" fill="#5d6254"/><rect x="78" y="95" width="80" height="72" rx="17" fill="url(#toyRed)" stroke="#96553f"/><rect x="61" y="103" width="18" height="65" rx="9" fill="url(#toyWood)" transform="rotate(9 70 103)"/><rect x="157" y="103" width="18" height="65" rx="9" fill="url(#toyWood)" transform="rotate(-9 166 103)"/><path d="M97 99v56h41V99M99 113h37m-37 17h37m-37 17h37" fill="none" stroke="#dfb768" stroke-width="4"/><circle cx="118" cy="75" r="28" fill="url(#toyWood)" stroke="#ae784b"/><path d="M91 66h54V29q-25-13-54 0z" fill="#626956" stroke="#4e5545"/><path d="M86 65h64v9H86z" fill="#767b60"/><path d="M117 34v22m-8-11h16" stroke="#d8b368" stroke-width="3"/><circle cx="107" cy="80" r="2" fill="#6c4b35"/><circle cx="129" cy="80" r="2" fill="#6c4b35"/><path d="m112 91 6 3 7-3" fill="none" stroke="#a16c4b" stroke-width="2"/><path d="M106 55h22m-25 89h30m-38 36h15m17 16h13" stroke="#fff5d5" opacity=".18"/></g><rect x="183" y="197" width="29" height="29" rx="3" fill="#bc9160" transform="rotate(7 197 212)"/><path d="m190 217 8-13 6 15m-12-5h10" fill="none" stroke="#f0d6a8" stroke-width="2"/></svg>
+        <span>Сделано для маленьких открытий</span>
+      </div>
+    </aside>
+    <section class="game-area" aria-label="Игровое поле">
+      <div class="game-heading"><span class="level-label">ПАРТИЯ <b id="seed-label">01</b></span><div class="closed-progress" id="progress" aria-label="Закрыто колонок: 0 из 4"><span class="progress-dots" id="progress-dots"></span><span><b id="closed-count">0</b> / 4</span></div></div>
+      <div class="machine" id="machine">
+        <div class="wood-crown"><span class="crown-line"></span><svg><use href="#icon-star"/></svg><span class="crown-line"></span></div>
+        <div class="preview-tray" id="tray" role="group" aria-label="Барабан с тремя рядами фишек"></div>
+        <div class="drop-guide" aria-hidden="true"><span>↓</span><span>↓</span><span>↓</span><span>↓</span></div>
+        <div class="channels" id="channels"></div>
+        <div class="wood-base"><span class="screw"></span><span>THE LITTLE WOODEN WORKSHOP</span><span class="screw"></span></div>
+      </div>
+      <div class="control-panel">
+        <button class="game-button rotate-button" id="rotate" aria-label="Прокрутить барабан: верхний ряд в центр"><span class="button-main"><span class="rotate-icon" aria-hidden="true">↑</span> UP</span><span class="button-sub">Прокрутить барабан</span></button>
+        <button class="game-button shift-button shift-left" id="shift-left" aria-label="Сдвинуть активный ряд влево по кругу"><span aria-hidden="true">←</span></button>
+        <button class="game-button shift-button shift-right" id="shift-right" aria-label="Сдвинуть активный ряд вправо по кругу"><span aria-hidden="true">→</span></button>
+        <button class="game-button drop-button" id="drop"><span class="button-main">DROP <svg><use href="#icon-arrow"/></svg></span><span class="button-sub">Опустить фишки</span></button>
+      </div>
+      <div class="status-line" id="status" role="status" aria-live="polite">↑ барабан · ← → сдвиг ряда · ↓ DROP</div>
+      <div class="under-controls"><button class="small-button" id="undo" disabled><span aria-hidden="true">↶</span> Отменить ход</button><button class="small-button" id="hint"><svg><use href="#icon-star"/></svg> Подсказка</button><button class="small-button mobile-rules rules-trigger">Как играть</button></div>
+    </section>
+    <aside class="notes-panel">
+      <div class="note-card"><span class="note-kicker">СЕКРЕТ МАСТЕРСКОЙ</span><div class="match-demo" aria-hidden="true"><i class="mini-chip c3"></i><i class="mini-chip c3"></i><i class="mini-chip c3"></i></div><h2>Три одинаковые<br>исчезают</h2><p>Остальные фишки опускаются.<br>Пустая колонка закроется.</p><div class="note-divider"></div><span class="note-bottom"><svg><use href="#icon-check"/></svg> Закройте все четыре дверцы</span></div>
+      <div class="turn-counter"><span>ХОДОВ СДЕЛАНО</span><strong id="move-count">00</strong><small>Никакой спешки. Только вы и фишки.</small></div>
+      <div class="horse-scene" aria-hidden="true"><svg viewBox="0 0 240 165"><ellipse cx="130" cy="153" rx="89" ry="8" fill="#796140" opacity=".11"/><path d="M31 131q97 42 183-4" fill="none" stroke="#986841" stroke-width="9" stroke-linecap="round"/><path d="m83 126 8-37 23 3-10 42m48-5-14-40 20-2 14 39" fill="#c29866" stroke="#a77d50" stroke-width="2"/><path d="M71 85q9-24 51-17l28 5 1-34 19-25 7 19 19 7-6 22-18-2 3 28q-5 26-58 23L79 99l-15 11 4-30" fill="url(#toyWood)" stroke="#ac7c4b" stroke-width="2"/><path d="m156 42 6 19-4 24m-35-13v24l23-1V76" fill="#9b5d45"/><circle cx="178" cy="43" r="2.5" fill="#6b4d33"/><path d="M70 84q-17-17-16 10" fill="none" stroke="#9a714a" stroke-width="6"/><rect x="189" y="105" width="31" height="32" rx="3" fill="#caac75"/><path d="m185 105 20-18 20 18" fill="#ae7254"/><path d="M201 120h8v17" fill="#8d7958"/></svg></div>
+    </aside>
+  </main>
+  <footer class="page-footer"><span>Четыре секрета</span><span>Чуть-чуть магии. Много тёплого дерева.</span><button class="text-button rules-trigger">Правила игры</button></footer>
+  <dialog id="rules-dialog" class="paper-dialog"><button class="dialog-close" aria-label="Закрыть">×</button><span class="eyebrow">ДОБРО ПОЖАЛОВАТЬ В МАСТЕРСКУЮ</span><h2>Четыре дверцы.<br>Один маленький секрет.</h2>
+    <ol class="rules-list">
+      <li><b>Две разные фишки в каждой колбе.</b> В начале партии в каждой колонке лежат две фишки разных цветов. Три ряда барабана заполняются случайными фишками.</li>
+      <li><b>UP прокручивает барабан.</b> Верхний ряд становится средним, средний уходит вниз, нижний появляется сверху. Активен крупный ряд в центре.</li>
+      <li><b>Стрелки сдвигают активный ряд по кругу.</b> Крайняя фишка появляется с другого края.</li>
+      <li><b>DROP сбрасывает активный ряд.</b> Фишки падают только в открытые колонки. Затем все четыре фишки среднего ряда заменяются случайными.</li>
+      <li><b>Соберите три по вертикали.</b> Три соседние фишки одного цвета исчезают, остальные опускаются. Если образуется новая тройка, она тоже исчезает. Пустая колонка закрывается.</li>
+      <li><b>Полная колба даёт последний шанс.</b> Если все 12 ячеек заняты, следующая фишка должна совпасть с двумя верхними. При совпадении тройка исчезнет. Если хотя бы в одной полной колонке совпадения нет, партия заканчивается. Можно отменить ход и попробовать иначе.</li>
+    </ol>
+    <p class="dialog-note">Отмена падения возвращает все три ряда к состоянию перед сбросом.</p><p class="keyboard-help">Компьютер: <kbd>↑</kbd> прокрутка · <kbd>↓</kbd> и <kbd>Пробел</kbd> DROP · <kbd>←</kbd> / <kbd>→</kbd> сдвиг · <kbd>Z</kbd> отмена</p><button class="solid-button" id="start-playing">Понятно, играем</button>
+  </dialog>
+  <dialog id="settings-dialog" class="paper-dialog compact-dialog"><button class="dialog-close" aria-label="Закрыть">×</button><span class="eyebrow">МАСТЕРСКАЯ</span><h2>Как вам удобно</h2><label class="setting-row"><span>Звук фишек<small>Тихие деревянные щелчки</small></span><input id="sound-setting" type="checkbox" role="switch"></label><label class="setting-row"><span>Меньше анимации<small>Быстрые и мягкие переходы</small></span><input id="motion-setting" type="checkbox" role="switch"></label><p class="dialog-note">Партия сохраняется на этом устройстве автоматически.</p></dialog>
+  <dialog id="new-dialog" class="paper-dialog compact-dialog"><button class="dialog-close" aria-label="Закрыть">×</button><span class="eyebrow">НОВОЕ НАЧАЛО</span><h2>Ещё одну партию?</h2><p>Текущая партия будет заменена новой.</p><div class="dialog-actions"><button class="soft-button dialog-cancel">Продолжить игру</button><button class="solid-button" id="confirm-new">Начать новую</button></div></dialog>
+  <dialog id="result-dialog" class="paper-dialog result-dialog"><span class="result-emblem" id="result-emblem">★</span><span class="eyebrow" id="result-kicker">ВСЕ СЕКРЕТЫ РАСКРЫТЫ</span><h2 id="result-title">Мастерская закрыта.<br>Чудеса продолжаются.</h2><p id="result-text"></p><button class="solid-button" id="play-again">Ещё одна партия</button><button class="text-button" id="result-back">Посмотреть поле</button></dialog>
+  <noscript>Для игры нужно разрешить JavaScript в браузере.</noscript>
+<script>(function (root) {
+  'use strict';
+  const CAPACITY = 12, COLUMNS = 4, COLOR_COUNT = 4, ACTIVE_ROW = 1;
+  const clone = value => JSON.parse(JSON.stringify(value));
+  function random(state, count) {
+    let n = state.rng | 0;
+    n ^= n << 13; n ^= n >>> 17; n ^= n << 5;
+    state.rng = n >>> 0;
+    return Math.floor((state.rng / 4294967296) * count);
+  }
+  function token(state, color) { return { id: ++state.uid, color }; }
+  function randomRow(state) {
+    return Array.from({ length: COLUMNS }, () => token(state, random(state, COLOR_COUNT)));
+  }
+  function compatible(tokens) {
+    return tokens.every(t => t.color === tokens[0].color);
+  }
+  function matchIndex(stack) {
+    for (let i = stack.length - 3; i >= 0; i--) {
+      if (compatible(stack.slice(i, i + 3))) return i;
+    }
+    return -1;
+  }
+  function settle(stack) {
+    const events = [];
+    let index;
+    while ((index = matchIndex(stack)) >= 0) {
+      const removed = stack.splice(index, 3);
+      events.push({ removed, after: stack.slice() });
+    }
+    return events;
+  }
+  function create(seed) {
+    const state = { version: 8, rng: (seed >>> 0) || 714235, seed: (seed >>> 0) || 714235,
+      uid: 0, stacks: [], closed: Array(COLUMNS).fill(false), rows: [], moves: 0, status: 'playing' };
+    state.stacks = Array.from({ length: COLUMNS }, () => {
+      const first = random(state, COLOR_COUNT);
+      const second = (first + 1 + random(state, COLOR_COUNT - 1)) % COLOR_COUNT;
+      return [token(state, first), token(state, second)];
+    });
+    state.rows = Array.from({ length: 3 }, () => randomRow(state));
+    return state;
+  }
+  function rotate(state) {
+    if (state.status !== 'playing') return false;
+    state.rows.unshift(state.rows.pop());
+    return true;
+  }
+  function canRescue(stack, incoming) {
+    return stack.length === CAPACITY && !!incoming && compatible([...stack.slice(-2), incoming]);
+  }
+  function shift(state, direction) {
+    if (state.status !== 'playing' || !['left','right'].includes(direction)) return false;
+    const row = state.rows[ACTIVE_ROW];
+    const offset = direction === 'left' ? 1 : row.length - 1;
+    state.rows[ACTIVE_ROW] = row.map((_, i) => row[(i + offset) % row.length]);
+    return true;
+  }
+  function drop(state) {
+    if (state.status !== 'playing') return null;
+    const row = state.rows[ACTIVE_ROW];
+    const active = state.closed.map((closed, i) => closed ? -1 : i).filter(i => i >= 0);
+    const overflow = active.filter(i => state.stacks[i].length >= CAPACITY && !canRescue(state.stacks[i], row[i]));
+    // A full column gets a last chance: the incoming token must match its top two.
+    if (overflow.length) {
+      state.status = 'lost';
+      state.moves++;
+      return { overflow, columns: [], won: false };
+    }
+    const columns = active.map(i => {
+      const landing = state.stacks[i].length;
+      const incoming = row[i];
+      state.stacks[i].push(incoming);
+      const events = settle(state.stacks[i]);
+      if (!state.stacks[i].length) state.closed[i] = true;
+      return { column: i, landing, incoming, events, closed: state.closed[i], rescue: landing === CAPACITY };
+    });
+    state.moves++;
+    state.rows[ACTIVE_ROW] = randomRow(state);
+    if (state.closed.every(Boolean)) state.status = 'won';
+    return { overflow: [], columns, won: state.status === 'won' };
+  }
+  function bestColor(stack) {
+    return stack.at(-1)?.color ?? 0;
+  }
+  function assess(state, column) {
+    if (state.closed[column]) return 'closed';
+    const incoming = state.rows[ACTIVE_ROW][column];
+    if (state.stacks[column].length >= CAPACITY) return canRescue(state.stacks[column], incoming) ? 'rescue' : 'danger';
+    const trial = [...state.stacks[column], incoming];
+    if (matchIndex(trial) >= 0) return 'match';
+    return incoming.color === bestColor(state.stacks[column]) ? 'pair' : 'neutral';
+  }
+  function valid(state) {
+    if (!state || state.version !== 8 || !Array.isArray(state.stacks) || state.stacks.length !== COLUMNS ||
+        !Array.isArray(state.closed) || state.closed.length !== COLUMNS || !Array.isArray(state.rows) || state.rows.length !== 3 ||
+        !['playing','won','lost'].includes(state.status) ||
+        !Number.isInteger(state.rng) || !Number.isInteger(state.uid) || !Number.isInteger(state.moves)) return false;
+    const ids = new Set();
+    const check = t => t && Number.isInteger(t.id) && !ids.has(t.id) && (ids.add(t.id), true) && Number.isInteger(t.color) && t.color >= 0 && t.color < COLOR_COUNT;
+    return state.rows.every(row => Array.isArray(row) && row.length === COLUMNS && row.every(check)) && state.stacks.every((stack, i) =>
+      Array.isArray(stack) && stack.length <= CAPACITY && stack.every(check) && state.closed[i] === (stack.length === 0));
+  }
+  function migrate(state) {
+    if (!state || typeof state !== 'object') return null;
+    const next = clone(state);
+    if (next.version === 3 || next.version === 4) {
+      if (!Array.isArray(next.closed) || next.closed.length !== COLUMNS || !next.closed.every(v => typeof v === 'boolean') ||
+          !Array.isArray(next.preview) || next.preview.length !== COLUMNS ||
+          !Array.isArray(next.stacks) || next.stacks.length !== COLUMNS ||
+          !next.stacks.every(stack => Array.isArray(stack) && stack.every(Boolean))) return null;
+      next.version = 5;
+      delete next.changes;
+      delete next.merges;
+      next.stacks.forEach((stack, i) => {
+        const remaining = stack.filter(t => t.color !== 'w');
+        settle(remaining);
+        next.stacks[i] = remaining;
+        if (!remaining.length) {
+          next.closed[i] = true;
+          next.preview[i] = null;
+        } else if (next.preview[i]?.color === 'w') {
+          next.preview[i].color = random(next, COLOR_COUNT);
+        }
+      });
+      if (next.closed.every(Boolean)) next.status = 'won';
+    }
+    if (next.version === 5) {
+      if (!Array.isArray(next.preview) || next.preview.length !== COLUMNS ||
+          !Array.isArray(next.closed) || next.closed.length !== COLUMNS) return null;
+      next.preview = next.preview.map((incoming, i) =>
+        next.closed[i] && incoming === null ? token(next, random(next, COLOR_COUNT)) : incoming);
+      next.version = 6;
+    }
+    if (next.version === 6) {
+      if (!Array.isArray(next.preview) || next.preview.length !== COLUMNS) return null;
+      next.rows = [randomRow(next), next.preview, randomRow(next)];
+      delete next.preview;
+      delete next.changes;
+      next.version = 8;
+    }
+    return valid(next) ? next : null;
+  }
+  const api = { CAPACITY, COLUMNS, COLOR_COUNT, ACTIVE_ROW, clone, create, rotate, shift, drop, settle, compatible, matchIndex, canRescue, bestColor, assess, valid, migrate };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.WoodGame = api;
+})(typeof globalThis === 'undefined' ? this : globalThis);
+</script>
+<script>(() => {
+  'use strict';
+  const G = window.WoodGame;
+  const $ = s => document.querySelector(s);
+  const names = ['коралловый','синий','жёлтый','зелёный'];
+  const storageKey = 'four-secrets-drum-v8';
+  let state, history = [], busy = false, audio;
+  let preferences = { sound: false, reduced: matchMedia('(prefers-reduced-motion: reduce)').matches };
+  const freshSeed = () => crypto.getRandomValues(new Uint32Array(1))[0] || 714235;
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || localStorage.getItem('four-secrets-single-row-v5') || localStorage.getItem('four-secrets-game-v4') || localStorage.getItem('four-secrets-game-v3') || localStorage.getItem('five-secrets-game-v2') || localStorage.getItem('five-secrets-game-v1'));
+    preferences = { ...preferences, ...saved?.preferences };
+    const restored=G.migrate(saved?.state);
+    if (restored) {
+      state = restored;
+      history = (saved.history || []).map(G.migrate).filter(Boolean).slice(-20);
+    }
+  } catch (_) { /* The game also works when browser storage is unavailable. */ }
+  if (!state) state = G.create(freshSeed());
+  function save() {
+    try { localStorage.setItem(storageKey, JSON.stringify({ state, history, preferences })); } catch (_) {}
+  }
+  function icon(name) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    const use = document.createElementNS('http://www.w3.org/2000/svg','use');
+    use.setAttribute('href','#icon-' + name); el.append(use); el.setAttribute('aria-hidden','true');
+    return el;
+  }
+  function makeToken(t, row) {
+    const el = document.createElement('div');
+    el.className = 'token c' + t.color;
+    el.dataset.id = t.id;
+    if (row !== undefined) el.style.setProperty('--row',row);
+    el.setAttribute('role','img');
+    el.setAttribute('aria-label',names[t.color] + ' цвет');
+    return el;
+  }
+  function makeDoor(animate = false) {
+    const door = document.createElement('div');
+    door.className = 'door' + (animate ? ' closing' : '');
+    door.setAttribute('aria-hidden','true');
+    const flourish1 = document.createElement('span'); flourish1.className='door-flourish'; flourish1.textContent='⌁';
+    const flourish2 = flourish1.cloneNode(true);
+    door.append(flourish1,icon('star'),flourish2);
+    return door;
+  }
+  function render() {
+    const tray = $('#tray'), channels = $('#channels');
+    tray.replaceChildren(); channels.replaceChildren();
+    state.rows.forEach((tiles, rowIndex) => {
+      const active = rowIndex === G.ACTIVE_ROW;
+      const row = document.createElement('div');
+      row.className = active ? 'drum-row is-active' : 'drum-row';
+      row.dataset.rowId = tiles[0].id;
+      row.setAttribute('role', 'group');
+      row.setAttribute('aria-label', ['Верхний ряд', 'Активный средний ряд', 'Нижний ряд'][rowIndex]);
+      tiles.forEach((tile, i) => {
+        const slot = document.createElement('div');
+        slot.className = 'slot';
+        slot.dataset.column = i;
+        slot.setAttribute('role', 'group');
+        const dropStatus = active && state.closed[i] ? ', колонка закрыта для сброса' : '';
+        slot.setAttribute('aria-label', `Колонка ${i + 1}: ${names[tile.color]}${dropStatus}`);
+        slot.append(makeToken(tile));
+        const number = document.createElement('span');
+        number.className = 'slot-number';
+        number.setAttribute('aria-hidden', 'true');
+        number.textContent = i + 1;
+        slot.append(number);
+        row.append(slot);
+      });
+      tray.append(row);
+    });
+    for (let i = 0; i < G.COLUMNS; i++) {
+      const channel = document.createElement('div');
+      channel.className = 'channel' + (state.stacks[i].length === G.CAPACITY ? G.assess(state,i) === 'rescue' ? ' rescue-ready' : ' danger' : '');
+      channel.dataset.column = i;
+      channel.setAttribute('role','group');
+      channel.setAttribute('aria-label',state.closed[i] ? `Колонка ${i+1} закрыта` : `Колонка ${i+1}: ${state.stacks[i].length} из 12 ячеек`);
+      const grid = document.createElement('div');grid.className='cell-grid';grid.setAttribute('aria-hidden','true');
+      for(let c=0;c<12;c++) grid.append(document.createElement('i'));
+      const number = document.createElement('span');number.className='channel-number';number.textContent=i+1;number.setAttribute('aria-hidden','true');
+      channel.append(grid,number);
+      state.stacks[i].forEach((t,row) => channel.append(makeToken(t,row)));
+      if (state.closed[i]) channel.append(makeDoor());
+      channels.append(channel);
+      $('.drop-guide').children[i].classList.toggle('muted',state.closed[i]);
+    }
+    updateControls();
+  }
+  function updateControls() {
+    const closed = state.closed.filter(Boolean).length;
+    $('#closed-count').textContent = closed;
+    $('#progress').setAttribute('aria-label',`Закрыто колонок: ${closed} из ${G.COLUMNS}`);
+    $('#progress-dots').replaceChildren(...state.closed.map(done => { const dot=document.createElement('i');if(done)dot.className='done';return dot; }));
+    const canPlay = !busy && state.status === 'playing';
+    for (const id of ['rotate', 'drop', 'shift-left', 'shift-right']) $(`#${id}`).disabled = !canPlay;
+    $('#undo').disabled = busy || !history.length;
+    $('#hint').disabled = busy || state.status !== 'playing';
+    $('#new-game').disabled = busy;
+    $('#move-count').textContent = String(state.moves).padStart(2,'0');
+    $('#seed-label').textContent = String(state.seed % 10000).padStart(4,'0');
+    document.body.classList.toggle('reduced-motion',preferences.reduced);
+  }
+  function status(text,warning=false) { $('#status').textContent=text;$('#status').classList.toggle('warning',warning); }
+  function rowStatus(message) {
+    const full = state.stacks.map((stack,i)=>!state.closed[i] && stack.length === G.CAPACITY ? i : -1).filter(i=>i>=0);
+    if(!full.length) { status(message); return; }
+    const blocked = full.find(i=>G.assess(state,i)==='danger');
+    if(blocked !== undefined)status(`Колонка ${blocked+1} заполнена. Ещё один ход на спасение: нужна комбинация с двумя верхними фишками.`,true);
+    else status(full.length === 1 ? `Колонка ${full[0]+1} заполнена, но совпадение готово — DROP освободит место.` : 'Для всех полных колонок готовы совпадения — можно нажать DROP.');
+  }
+  function sound(kind) {
+    if (!preferences.sound) return;
+    try {
+      audio ||= new (window.AudioContext || window.webkitAudioContext)();
+      if(audio.state === 'suspended') audio.resume();
+      const oscillator=audio.createOscillator(),gain=audio.createGain();
+      const now=audio.currentTime;
+      const frequency=kind==='merge'?690:kind==='close'?880:280;
+      oscillator.type='sine';oscillator.frequency.setValueAtTime(frequency,now);
+      oscillator.frequency.exponentialRampToValueAtTime(frequency*.52,now+.12);
+      gain.gain.setValueAtTime(.055,now);gain.gain.exponentialRampToValueAtTime(.001,now+.17);
+      oscillator.connect(gain);gain.connect(audio.destination);oscillator.start(now);oscillator.stop(now+.18);
+    } catch (_) {}
+  }
+  const wait = ms => new Promise(resolve => setTimeout(resolve,preferences.reduced?18:ms));
+  async function rotate() {
+    if (busy || state.status !== 'playing') return;
+    const previous = new Map(Array.from($('#tray').children, row => [row.dataset.rowId, row.getBoundingClientRect()]));
+    if (!G.rotate(state)) return;
+    busy = true;
+    render();
+    sound('tap');
+    rowStatus('Верхний ряд перешёл в центр.');
+    save();
+    if (!preferences.reduced) {
+      const animations = Array.from($('#tray').children, (row, i) => {
+        const before = previous.get(row.dataset.rowId);
+        const after = row.getBoundingClientRect();
+        const frames = i === 0
+          ? [{ transform: 'translateY(-75%)', opacity: 0 }, { transform: 'none', opacity: 1 }]
+          : [{ transform: `translateY(${before.top - after.top}px) scaleY(${before.height / after.height})` }, { transform: 'none' }];
+        return row.animate(frames, { duration: 230, easing: 'ease-out' }).finished.catch(() => {});
+      });
+      await Promise.all(animations);
+    }
+    busy = false;
+    updateControls();
+  }
+  async function shift(direction) {
+    if(busy || state.status !== 'playing')return;
+    const activeSelector = '.drum-row.is-active .token';
+    const previous = new Map(Array.from(document.querySelectorAll(activeSelector),el=>[el.dataset.id,el.getBoundingClientRect()]));
+    if(!G.shift(state,direction))return;
+    busy=true;
+    render();sound('tap');
+    rowStatus(`Активный ряд сдвинут ${direction === 'left' ? 'влево' : 'вправо'} по кругу.`);
+    const animations=[];
+    if(!preferences.reduced) {
+      const trayWidth=$('#tray').getBoundingClientRect().width;
+      document.querySelectorAll(activeSelector).forEach(el=>{
+        const before=previous.get(el.dataset.id),after=el.getBoundingClientRect();
+        if(!before || !el.animate)return;
+        const distance=before.left-after.left;
+        const wrapped=direction==='right' ? distance>0 : distance<0;
+        const frames=wrapped ? [{opacity:0,transform:`translateX(${direction==='right'?-16:16}px)`},{opacity:1,transform:'translateX(0)'}] :
+          [{opacity:1,transform:`translateX(${Math.max(-trayWidth,Math.min(trayWidth,distance))}px)`},{opacity:1,transform:'translateX(0)'}];
+        animations.push(el.animate(frames,{duration:180,easing:'ease-out'}).finished.catch(()=>{}));
+      });
+    }
+    save();
+    await Promise.all(animations);
+    busy=false;updateControls();
+  }
+  async function animateColumn(action) {
+    const channel=document.querySelector(`.channel[data-column="${action.column}"]`);
+    const slot=document.querySelector(`.drum-row.is-active .slot[data-column="${action.column}"]`);
+    const old=slot.querySelector('.token');
+    let incoming;
+    if(action.rescue) {
+      // A full column has no thirteenth cell. Animate the match from the upper slot.
+      incoming=old;
+      if(!preferences.reduced && incoming.animate) {
+        await incoming.animate([{transform:'translateY(0)',filter:'brightness(1)'},{transform:'translateY(5px)',filter:'brightness(1.3)'}],{duration:260,easing:'ease-in-out'}).finished;
+      }
+    } else {
+      const start=old.getBoundingClientRect();
+      old.style.visibility='hidden';
+      incoming=makeToken(action.incoming,action.landing);
+      channel.append(incoming);
+      const end=incoming.getBoundingClientRect();
+      if (!preferences.reduced && incoming.animate) {
+        const flight = old.cloneNode(true);
+        flight.classList.add('drop-flight');
+        flight.setAttribute('aria-hidden', 'true');
+        Object.assign(flight.style, { left: `${start.left}px`, top: `${start.top}px`, width: `${start.width}px`, height: `${start.height}px`, visibility: 'visible' });
+        document.body.append(flight);
+        incoming.style.visibility = 'hidden';
+        try {
+          await flight.animate([{ transform: 'none' }, { transform: `translate(${end.left - start.left}px, ${end.top - start.top}px)` }],
+            { duration: 440 + Math.max(0, 9 - action.landing) * 16, easing: 'cubic-bezier(.48,.06,.84,.55)' }).finished;
+        } finally {
+          flight.remove();
+          incoming.style.visibility = '';
+        }
+      }
+    }
+    incoming.classList.add('landing');sound('tap');await wait(160);
+    const findToken = id => channel.querySelector(`[data-id="${id}"]`) || slot.querySelector(`[data-id="${id}"]`);
+    for (const event of action.events) {
+      event.removed.forEach(t => {
+        const el = findToken(t.id);
+        el?.classList.remove('landing');
+        el?.classList.add('merging');
+      });
+      sound('merge');await wait(320);
+      event.removed.forEach(t => findToken(t.id)?.remove());
+      event.after.forEach((t, index) => findToken(t.id)?.style.setProperty('--row', index));
+      await wait(330);
+    }
+    if(action.closed) {
+      channel.append(makeDoor(true));sound('close');await wait(750);
+    }
+  }
+  async function drop() {
+    if(busy || state.status!=='playing')return;
+    busy=true;
+    history.push(G.clone(state));if(history.length>20)history.shift();
+    const result=G.drop(state);
+    updateControls();
+    status('Фишки находят своё место…');
+    try {
+      if(result.overflow.length) {
+        result.overflow.forEach(i=>document.querySelector(`.channel[data-column="${i}"]`).classList.add('danger'));
+        status(`Колонка ${result.overflow[0]+1} заполнена, а совпадение сверху не получилось.`,true);
+        await wait(450);
+      } else {
+        await Promise.all(result.columns.map(animateColumn));
+      }
+    } catch (error) { console.error('Animation interrupted',error); }
+    busy=false;
+    render();save();
+    if(state.status==='won') { status('Все четыре дверцы закрыты!');celebrate();await wait(500);showResult(); }
+    else if(state.status==='lost')showResult();
+    else {
+      const closedNow=result.columns.filter(c=>c.closed).length;
+      const clearedNow=result.columns.some(c=>c.events.length);
+      rowStatus(closedNow ? `Дверца закрылась! Осталось колонок: ${G.COLUMNS-state.closed.filter(Boolean).length}.` :
+        clearedNow ? 'Три одинаковые фишки исчезли.' : 'В центре новый ряд.');
+    }
+  }
+  function undo() {
+    if(busy||!history.length)return;
+    state=history.pop();
+    render();save();rowStatus('Ход отменён. Попробуйте другое решение.');
+    $('#result-dialog').close();
+  }
+  let hintTimer;
+  function hint() {
+    if(busy||state.status!=='playing')return;
+    clearTimeout(hintTimer);
+    document.querySelectorAll('.hint-color').forEach(e=>e.remove());
+    document.querySelectorAll('.channel').forEach((el,i)=>{
+      if(state.closed[i])return;
+      el.classList.remove('hinted');void el.offsetWidth;el.classList.add('hinted');
+      const dot=document.createElement('i');dot.className='hint-color c'+G.bestColor(state.stacks[i]);dot.setAttribute('aria-hidden','true');el.append(dot);
+    });
+    const open = state.closed.map((closed,i)=>closed ? -1 : i).filter(i=>i>=0);
+    const i = open.find(i=>G.assess(state,i)==='danger') ?? open.find(i=>G.assess(state,i)==='rescue') ?? open.find(i=>G.assess(state,i)==='match') ?? open.reduce((a,b)=>state.stacks[b].length>state.stacks[a].length?b:a);
+    const assessment=G.assess(state,i);
+    status(assessment==='danger'?(G.compatible(state.stacks[i].slice(-2)) ?
+      `Полная колонка ${i+1}: нужен ${names[G.bestColor(state.stacks[i])]} цвет. Сдвиньте активный ряд или прокрутите барабан.` :
+      `Колонка ${i+1} заполнена, а две верхние фишки разные. Для спасения можно отменить предыдущий ход.`):
+      assessment==='rescue'?`Полная колонка ${i+1}: совпадение готово. После DROP три одинаковые фишки исчезнут и освободят место.`:
+      assessment==='match'?`Колонка ${i+1}: верхняя фишка уже даёт комбинацию. Можно нажать DROP.`:
+      `Колонка ${i+1}: полезен ${names[G.bestColor(state.stacks[i])]} цвет. Точки показывают полезные цвета.`,assessment==='danger');
+    hintTimer=setTimeout(()=>document.querySelectorAll('.hint-color').forEach(e=>e.remove()),6500);
+  }
+  function celebrate() {
+    if(preferences.reduced)return;
+    for(let i=0;i<38;i++) {
+      const confetti=document.createElement('i');confetti.className='celebration';
+      confetti.style.cssText=`left:${20+Math.random()*60}%;top:30%;background:var(--c${i%G.COLOR_COUNT});--dx:${(Math.random()-.5)*400}px;--dy:${150+Math.random()*370}px;--rot:${Math.random()*700}deg;animation-delay:${Math.random()*.2}s`;
+      $('.game-area').append(confetti);setTimeout(()=>confetti.remove(),2100);
+    }
+  }
+  function showResult() {
+    const won=state.status==='won';
+    $('#result-emblem').textContent=won?'★':'↶';
+    $('#result-kicker').textContent=won?'ВСЕ СЕКРЕТЫ РАСКРЫТЫ':'У КАЖДОЙ ЗАДАЧИ ЕСТЬ РЕШЕНИЕ';
+    $('#result-title').innerHTML=won?'Мастерская закрыта.<br>Чудеса продолжаются.':'В этой колонке<br>не хватило совпадения.';
+    $('#result-text').textContent=won?`Все четыре дверцы закрыты за ${state.moves} ходов. Можно снова заглянуть в мастерскую.`:'Колонка заполнена, а верхняя фишка не собирает комбинацию с двумя последними в стопке. Отмените ход или начните новую партию.';
+    $('#result-back').textContent=won?'Посмотреть поле':'Отменить последний ход';
+    if(!$('#result-dialog').open)$('#result-dialog').showModal();
+  }
+  function newGame() {
+    document.querySelectorAll('dialog[open]').forEach(d=>d.close());
+    state=G.create(freshSeed());history=[];busy=false;
+    render();save();status('↑ барабан · ← → сдвиг ряда · ↓ DROP');
+  }
+  $('#rotate').addEventListener('click',rotate);$('#drop').addEventListener('click',drop);
+  $('#shift-left').addEventListener('click',()=>shift('left'));$('#shift-right').addEventListener('click',()=>shift('right'));
+  $('#undo').addEventListener('click',undo);$('#hint').addEventListener('click',hint);
+  $('#new-game').addEventListener('click',()=>$('#new-dialog').showModal());
+  $('#confirm-new').addEventListener('click',newGame);$('#play-again').addEventListener('click',newGame);
+  $('#result-back').addEventListener('click',()=>state.status==='lost'?undo():$('#result-dialog').close());
+  document.querySelectorAll('.rules-trigger').forEach(b=>b.addEventListener('click',()=>$('#rules-dialog').showModal()));
+  $('#start-playing').addEventListener('click',()=>$('#rules-dialog').close());
+  $('#settings').addEventListener('click',()=>{
+    $('#sound-setting').checked=preferences.sound;$('#motion-setting').checked=preferences.reduced;
+    $('#settings-dialog').showModal();
+  });
+  $('#sound-setting').addEventListener('change',e=>{preferences.sound=e.target.checked;save();sound('tap');});
+  $('#motion-setting').addEventListener('change',e=>{preferences.reduced=e.target.checked;updateControls();save();});
+  document.querySelectorAll('.dialog-close,.dialog-cancel').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));
+  document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{
+    if(e.target!==d)return;const r=d.getBoundingClientRect();
+    if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();
+  }));
+  document.addEventListener('keydown',e=>{
+    if(e.ctrlKey||e.metaKey||e.altKey||document.querySelector('dialog[open]')||e.target.matches('input,textarea'))return;
+    if(e.code==='Space'&&!e.target.matches('button,a')){e.preventDefault();drop();}
+    else if(e.code==='ArrowUp'){e.preventDefault();rotate();}
+    else if(e.code==='ArrowDown'){e.preventDefault();drop();}
+    else if(e.code==='ArrowLeft'){e.preventDefault();shift('left');}
+    else if(e.code==='ArrowRight'){e.preventDefault();shift('right');}
+    else if(e.code==='KeyZ'){e.preventDefault();undo();}
+  });
+  render();save();
+  if(state.status!=='playing')status(state.status==='won'?'Все четыре дверцы закрыты. Можно начать новую партию.':'Партия завершена. Отмените ход или начните заново.',state.status==='lost');
+  else rowStatus('↑ барабан · ← → сдвиг ряда · ↓ DROP');
+})();
+</script>
+</body>
+</html>

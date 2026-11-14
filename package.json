@@ -1,0 +1,10 @@
+{
+  "name": "season-shuffle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A wooden four-season puzzle with an animated drum",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node tests/check.cjs"
+  }
+}
