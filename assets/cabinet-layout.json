@@ -1,64 +1,75 @@
 {
-  "source": "workshop-cabinet.png",
-  "sourceWidth": 1024,
-  "sourceHeight": 1536,
-  "width": 1024,
-  "height": 2000,
-  "bands": [
-    {
-      "name": "sign",
-      "s0": 0,
-      "s1": 292,
-      "t0": 0,
-      "t1": 292
-    },
-    {
-      "name": "drum",
-      "s0": 292,
-      "s1": 500,
-      "t0": 292,
-      "t1": 642
-    },
-    {
-      "name": "bridge",
-      "s0": 500,
-      "s1": 600,
-      "t0": 642,
-      "t1": 742
-    },
-    {
-      "name": "field",
-      "s0": 600,
-      "s1": 1216,
-      "t0": 742,
-      "t1": 1702
-    },
-    {
-      "name": "base",
-      "s0": 1216,
-      "s1": 1444,
-      "t0": 1702,
-      "t1": 1908
-    },
-    {
-      "name": "feet",
-      "s0": 1444,
-      "s1": 1536,
-      "t0": 1908,
-      "t1": 2000
-    }
-  ],
+  "source": "cabinet-gold-v7.png",
+  "sourceWidth": 897,
+  "sourceHeight": 1753,
+  "width": 897,
+  "height": 1753,
+  "scaling": "uniform; object-fit: contain",
+  "background": {
+    "source": "workshop-background-v6.png",
+    "width": 1774,
+    "height": 887,
+    "scaling": "cover, center; crop sides on narrow screens"
+  },
   "channels": {
-    "left": 180.736,
-    "top": 746.488312,
-    "width": 662.528,
-    "height": 921.6,
-    "gap": 26.50112
+    "left": 162,
+    "top": 654.29701248,
+    "width": 580,
+    "height": 807.7823999999999,
+    "gap": 33.333333333333336,
+    "centers": [
+      222,
+      375,
+      528.5,
+      683
+    ],
+    "offsets": [
+      0,
+      -0.3333333333333333,
+      -0.16666666666666666,
+      1
+    ]
   },
   "drum": {
-    "left": 186.368,
-    "top": 322.74616,
-    "width": 653.312,
-    "height": 288.18462
+    "left": 163.254,
+    "top": 282.88700924,
+    "width": 572.2860000000001,
+    "height": 252.59381943
+  },
+  "floor": {
+    "contactPlane": 0.9845978322875071,
+    "reflectionStart": 0.9845978322875071,
+    "reflectionSourceGroundY": 1726,
+    "reflectionVerticalCompression": 0.52,
+    "reflectionVisibleHeight": 0.06617227609811752,
+    "reflectionOpacity": 0.43
+  },
+  "axle": {
+    "rotationStep": 60,
+    "durationMs": 560,
+    "projection": "rotating circular SVG group inside a fixed elliptical viewport; faces mirrored"
+  },
+  "tokens": {
+    "source": "tile-bodies-v8.png",
+    "geometry": "tile-bodies-v8-layout.json",
+    "alignedBy": "solid wood body, excluding drop shadow",
+    "widthFraction": 0.9,
+    "heightFraction": 0.94,
+    "emblemHeightFraction": 0.6
+  },
+  "controls": {
+    "geometry": "control-faces-v10-layout.json",
+    "nativeBodyAspectRatios": true,
+    "desktop": {
+      "topFraction": 0.884,
+      "heightFraction": 0.05,
+      "arrowOffsetCqw": 0.3,
+      "sideKeys": "centered vertically between up and down; gold sprigs beneath"
+    },
+    "mobile": {
+      "topFraction": 0.8815,
+      "heightFraction": 0.053
+    },
+    "visibleDropLabel": "DROP"
   }
 }

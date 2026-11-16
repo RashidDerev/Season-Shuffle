@@ -1,0 +1,107 @@
+{
+  "image": "tile-bodies-v8.png",
+  "width": 953,
+  "height": 1651,
+  "bodyBounds": [
+    {
+      "color": 0,
+      "left": 49,
+      "top": 46,
+      "width": 846,
+      "height": 355,
+      "regionTop": 30,
+      "regionHeight": 395,
+      "css": {
+        "--art-left": "-5.79196217%",
+        "--art-top": "-4.50704225%",
+        "--art-width": "112.64775414%",
+        "--art-height": "111.26760563%",
+        "--atlas-height": "417.97468354%",
+        "--atlas-y": "2.38853503%"
+      }
+    },
+    {
+      "color": 1,
+      "left": 48,
+      "top": 450,
+      "width": 851,
+      "height": 357,
+      "regionTop": 434,
+      "regionHeight": 392,
+      "css": {
+        "--art-left": "-5.64042303%",
+        "--art-top": "-4.48179272%",
+        "--art-width": "111.98589894%",
+        "--art-height": "109.80392157%",
+        "--atlas-height": "421.17346939%",
+        "--atlas-y": "34.47180302%"
+      }
+    },
+    {
+      "color": 2,
+      "left": 48,
+      "top": 847,
+      "width": 852,
+      "height": 358,
+      "regionTop": 831,
+      "regionHeight": 396,
+      "css": {
+        "--art-left": "-5.63380282%",
+        "--art-top": "-4.46927374%",
+        "--art-width": "111.85446009%",
+        "--art-height": "110.61452514%",
+        "--atlas-height": "416.91919192%",
+        "--atlas-y": "66.21513944%"
+      }
+    },
+    {
+      "color": 3,
+      "left": 47,
+      "top": 1250,
+      "width": 853,
+      "height": 364,
+      "regionTop": 1234,
+      "regionHeight": 412,
+      "css": {
+        "--art-left": "-5.50996483%",
+        "--art-top": "-4.39560440%",
+        "--art-width": "111.72332943%",
+        "--art-height": "113.18681319%",
+        "--atlas-height": "400.72815534%",
+        "--atlas-y": "99.59644875%"
+      }
+    }
+  ],
+  "alignment": "solid wood bounding box, excluding cast shadow",
+  "logicalBody": {
+    "wellWidthFraction": 0.9,
+    "cellHeightFraction": 0.94,
+    "cellBottomFraction": 0.03,
+    "emblemHeightFraction": 0.6,
+    "emblemCenterYFraction": 0.43
+  },
+  "wellCenters": [
+    222,
+    375,
+    528.5,
+    683
+  ],
+  "wellInteriors": [
+    {
+      "left": 159,
+      "right": 285
+    },
+    {
+      "left": 312,
+      "right": 438
+    },
+    {
+      "left": 465,
+      "right": 592
+    },
+    {
+      "left": 620,
+      "right": 746
+    }
+  ]
+}

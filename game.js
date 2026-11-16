@@ -95,18 +95,27 @@
   }
   function updateControls() {
     const closed = state.closed.filter(Boolean).length;
-    $('#closed-count').textContent = closed;
     $('#mobile-closed').textContent = `${closed} / 4`;
-    $('#progress').setAttribute('aria-label',`Закрыто колонок: ${closed} из ${G.COLUMNS}`);
-    $('#progress-dots').replaceChildren(...state.closed.map(done => { const dot=document.createElement('i');if(done)dot.className='done';return dot; }));
+    $('#mobile-closed').parentElement.setAttribute('aria-label',`Закрыто колонок: ${closed} из ${G.COLUMNS}`);
     const canPlay = !busy && state.status === 'playing';
     for (const id of ['rotate', 'rotate-down', 'drop', 'shift-left', 'shift-right']) $(`#${id}`).disabled = !canPlay;
     $('#undo').disabled = busy || !history.length;
     $('#hint').disabled = busy || state.status !== 'playing';
     $('#new-game').disabled = busy;
-    $('#move-count').textContent = String(state.moves).padStart(2,'0');
     $('#seed-label').textContent = String(state.seed % 10000).padStart(4,'0');
     document.body.classList.toggle('reduced-motion',preferences.reduced);
+  }
+  // Use the same short physical press for pointer, keyboard and swipe actions.
+  // Temporary input locking must never fade the other controls.
+  const controlPressTimers = new WeakMap();
+  function pressControl(id) {
+    const button = $('#' + id);
+    clearTimeout(controlPressTimers.get(button));
+    button.classList.add('is-pressed');
+    controlPressTimers.set(button, setTimeout(() => {
+      button.classList.remove('is-pressed');
+      controlPressTimers.delete(button);
+    }, 115));
   }
   function status(text,warning=false) { $('#status').textContent=text;$('#status').classList.toggle('warning',warning); }
   function rowStatus(message) {
@@ -143,11 +152,41 @@
       zIndex: String(1 + Math.round(50 * facing))
     };
   }
+  // Rotate engravings in a circular SVG plane BEFORE its fixed elliptical projection.
+  // Rotating the outer ellipse would make the cap wobble instead of turning.
+  const axleEngravings = Array.from(document.querySelectorAll('.axle-engraving'));
+  let axleAngle = 0;
+  function paintAxles(angle) {
+    axleEngravings.forEach(engraving => {
+      const visibleAngle = engraving.dataset.side === 'right' ? -angle : angle;
+      engraving.setAttribute('transform', 'rotate(' + visibleAngle + ' 40 40)');
+    });
+  }
+  function turnAxles(delta, duration = 560) {
+    const from = axleAngle;
+    axleAngle = ((from + delta) % 360 + 360) % 360;
+    if (preferences.reduced || duration === 0) {
+      paintAxles(axleAngle);
+      return Promise.resolve();
+    }
+    const started = performance.now();
+    return new Promise(resolve => {
+      function frame(now) {
+        const phase = Math.max(0, Math.min(1, (now - started) / duration));
+        const eased = phase * phase * (3 - 2 * phase);
+        paintAxles(from + delta * eased);
+        if (phase < 1) requestAnimationFrame(frame);
+        else { paintAxles(axleAngle); resolve(); }
+      }
+      requestAnimationFrame(frame);
+    });
+  }
   async function rotate(direction = 'up') {
     if (busy || state.status !== 'playing') return;
     const tray = $('#tray');
     const rows = Array.from(tray.children);
     if (!G.rotate(state, direction)) return;
+    pressControl(direction === 'down' ? 'rotate-down' : 'rotate');
     busy = true;
     updateControls();
     sound('tap');
@@ -169,20 +208,21 @@
         tray.append(ghost);
         faces.push({ row: ghost, angle: sign === 1 ? -120 : 120 });
         tray.classList.add('is-spinning');
-        document.querySelectorAll('.drum-axle').forEach(axle => axle.classList.add('spinning'));
-        await Promise.all(faces.map(face => {
+        const rowAnimations = faces.map(face => {
           const frames = Array.from({ length: 33 }, (_, step) => ({
             ...drumPose(face.angle + sign * 60 * step / 32), offset: step / 32
           }));
           return face.row.animate(frames, {
-            duration: 560, easing: 'cubic-bezier(.35,.05,.2,1)', fill: 'forwards'
+            duration: 560, easing: 'cubic-bezier(.333333,0,.666667,1)', fill: 'forwards'
           }).finished.catch(() => {});
-        }));
+        });
+        await Promise.all([...rowAnimations, turnAxles(sign * 60, 560)]);
+      } else {
+        await turnAxles(direction === 'down' ? -60 : 60, 0);
       }
     } finally {
       ghost?.remove();
       tray.classList.remove('is-spinning');
-      document.querySelectorAll('.drum-axle').forEach(axle => axle.classList.remove('spinning'));
       busy = false;
       render();
     }
@@ -192,6 +232,7 @@
     const activeSelector = '.drum-row.is-active .token';
     const previous = new Map(Array.from(document.querySelectorAll(activeSelector),el=>[el.dataset.id,el.getBoundingClientRect()]));
     if(!G.shift(state,direction))return;
+    pressControl(direction === 'left' ? 'shift-left' : 'shift-right');
     busy=true;
     render();sound('tap');
     rowStatus(`Активный ряд сдвинут ${direction === 'left' ? 'влево' : 'вправо'} по кругу.`);
@@ -276,6 +317,7 @@
   }
   async function drop() {
     if(busy || state.status!=='playing')return;
+    pressControl('drop');
     busy=true;
     history.push(G.clone(state));if(history.length>20)history.shift();
     const result=G.drop(state);
@@ -398,12 +440,6 @@
     else rotate(dy < 0 ? 'down' : 'up');
   });
   drumWindow.addEventListener('pointercancel', () => { pointerStart = null; });
-  for (let i=0; i<15; i++) {
-    const spark = document.createElement('i'); spark.className='ambient-spark';
-    spark.setAttribute('aria-hidden','true');
-    spark.style.cssText=`left:${5+(i*31)%90}%;top:${10+(i*17)%80}%;--duration:${5+i%4}s;--delay:${-i*.7}s`;
-    $('#machine').append(spark);
-  }
   render();save();
   if(state.status!=='playing')status(state.status==='won'?'Все четыре дверцы закрыты. Можно начать новую партию.':'Партия завершена. Отмените ход или начните заново.',state.status==='lost');
   else rowStatus('Пробел — DROP · ↑ ↓ барабан · ← → сдвиг');

@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "cabinet-gold-v7.png",
+  "prompts": [
+    {
+      "key": "drop",
+      "prompt": "Use case: stylized-concept. Asset type: a single production game UI button sprite on transparent background. The attached carved Season Shuffle cabinet is STYLE REFERENCE ONLY, not an edit target. Create ONLY a beautiful horizontal button, front-facing orthographic, rounded rectangular silhouette, body aspect ratio about 2.8:1, generous transparent padding. Deep forest and olive green STAINED WOOD with exceptionally tactile real flowing wood grain, carved rounded edges and a substantial warm chestnut wooden lower thickness. Satin waxed wood, not plastic or metal. A thin honey-gold carved leaf border follows the edge. In the center, large ornate bold classical serif lettering, EXACT TEXT 'DROP', D R O P. Letters are raised gold with strongly modeled bevels, warm highlights on upper-left, golden middle tones, dark amber side extrusion and natural contact shadows, echoing the sculpted gold SEASON SHUFFLE letters on reference. Text should occupy roughly 70% of width and feel majestic, sculpted and readable. Restrained decoration, elegant craftsmanship. Lighting from upper left. No other text, no SPACE, no arrow or icon, no flowers. No scene, no cabinet, no floor, no separate pedestal, no background. Include the entire button silhouette and a very short soft dark translucent contact shadow, with clear transparent padding. Output truly transparent PNG, isolated single sprite."
+    },
+    {
+      "key": "key",
+      "prompt": "Use case: stylized-concept. Asset type: single blank wooden arrow-key button face sprite, transparent background. The attached Season Shuffle cabinet is STYLE REFERENCE ONLY, not an edit target. Draw ONLY one chunky small rounded rectangular wooden keycap, front-facing orthographic. Body aspect ratio 1.45:1, gently rounded square corners, no perspective skew. Rich warm honey chestnut stained WOOD, wonderfully visible natural flowing wood fibers, tactile sculpted rounded bevels and dark carved walnut lower thickness. Thin gold inlay at the outer rim, restrained small engraved leaf curls only in four corners, leaving the center blank. Satin wax finish with a warm upper-left soft highlight; darker amber right and bottom surfaces give clear physical depth. Match the fine handcrafted richness of the cabinet, avoid plastic or shiny continuous white edge bands. IMPORTANT: center entirely BLANK, absolutely NO arrow, no symbols, no text. This sprite will have a thin gold SVG arrow overlaid in code. No socket, no extra frame, no scene, no cabinet, no floor. Whole key face visible, centered with generous transparent margins and very short soft dark translucent contact shadow. Truly transparent isolated PNG."
+    }
+  ]
+}

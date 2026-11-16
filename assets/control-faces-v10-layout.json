@@ -1,0 +1,27 @@
+{
+  "version": 10,
+  "drop": {
+    "source": "drop-button-v10.png",
+    "width": 2086,
+    "height": 754,
+    "solidBody": {
+      "left": 98,
+      "top": 74,
+      "width": 1886,
+      "height": 596
+    }
+  },
+  "arrow": {
+    "source": "arrow-key-v10.png",
+    "width": 1510,
+    "height": 1041,
+    "solidBody": {
+      "left": 220,
+      "top": 88,
+      "width": 1044,
+      "height": 834
+    },
+    "emblemCenterYFraction": 0.435
+  },
+  "note": "Native body aspect ratios preserved; source padding is compensated in CSS, not stretched into the logical button."
+}
